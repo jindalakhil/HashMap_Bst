@@ -15,6 +15,7 @@ public class MyHashMap<K, V> {
 
 			if(myMapNode==null)
 				return null;
+			
 			else
 				return myMapNode.getValue();	
 		}
