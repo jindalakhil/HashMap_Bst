@@ -3,12 +3,12 @@ package com.capg.linkedlist;
 public class MyLinkedList<K> {
 	public INode head;
 	public INode tail;
-
+	
 	public MyLinkedList() {
 		this.head=null;
 		this.tail=null;
 	}
-
+	
 	public void addAtFront(INode<K> node) {
 		if(head==null) {
 			this.head=node;
@@ -19,7 +19,7 @@ public class MyLinkedList<K> {
 			this.head=node;
 		}
 	}
-
+	
 	public void addAtEnd(INode<K> node) {
 		if(head==null) {
 			this.head=node;
@@ -30,7 +30,7 @@ public class MyLinkedList<K> {
 			tail=tail.getNext();
 		}
 	}
-
+	 
 	public void insertAtMiddle(INode<K> node) {
 		if(head==null) {
 			this.head=node;
@@ -47,9 +47,9 @@ public class MyLinkedList<K> {
 		INode temp1=temp.getNext();
 		temp.setNext(node);
 		node.setNext(temp1);
-
+		
 	}
-
+	
 	public INode<K> pop() {
 		if(head==null) {
 			return null;
@@ -59,7 +59,7 @@ public class MyLinkedList<K> {
 		temp.setNext(null);
 		return temp;
 	}
-
+	
 	public INode popLast() {
 		if(head==null)
 			return null;
@@ -71,9 +71,9 @@ public class MyLinkedList<K> {
 		tail=temp;
 		tail.setNext(null);
 		return temp1;
-
+		
 	}
-
+	
 	public <K> INode search(K key) {
 		 if(head==null)
 			 return null;
@@ -86,9 +86,9 @@ public class MyLinkedList<K> {
 			 temp=temp.getNext();
 		 }
 		 return null;
-
+		 
 	}
-
+	
 	public void insert(INode node,int key) {
 		if(head==null)
 			return;
@@ -97,31 +97,32 @@ public class MyLinkedList<K> {
 		temp.setNext(node);
 		node.setNext(temp1);
 	}
-
-	public void deleteAnode(int key) {
+	
+	public INode deleteAnode(K key) {
 		if(head==null)
-			return;
+			return null;
 		if(head.getKey().equals(key)) {
-			pop();
-		return;
+			
+		return pop();
 		}
 		if(tail.getKey().equals(key)) {
-			popLast();
-		return;
+			
+		return popLast();
 		}
 		INode temp=head;
 		while(temp!=null) {
 			if(temp.getNext().getKey().equals(key)) {
+				INode res=temp.getNext();
 				temp.setNext(temp.getNext().getNext());
-				return;
+				return res;
 			}
 			temp=temp.getNext();
 		}
-
-
+		
+		return null;
 	}	
-
-
+	
+	
 	public int lenList() {
 		if(this.head!=null) {
 			INode temp=head;
@@ -136,15 +137,16 @@ public class MyLinkedList<K> {
 			return 0;
 		}
 	}
-
+	
 	public void printList() {
-		if(this.head!=null) {
-			INode temp=head;
-			while(temp!=null) {
-				System.out.print(temp.getKey()+ "->");
-				temp=temp.getNext();
-			}
-			System.out.println(" ");
+		StringBuffer myNodes=new StringBuffer("My Nodes....");
+		INode tempNode=head;
+		while(tempNode.getNext()!=null) {
+			myNodes.append(tempNode.getKey()+"-->");
+			tempNode=tempNode.getNext();
 		}
+		myNodes.append(tempNode.getKey());
+		System.out.println(myNodes);
+		
 	}
 }
